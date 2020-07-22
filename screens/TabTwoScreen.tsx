@@ -1,32 +1,55 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, FlatList, TextInput } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { useState, useEffect } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function TabTwoScreen() {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState<Pokemon>();
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon/')
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-    </View>
+    <ScrollView style={styles.container}>
+      <View>
+        <TextInput
+          style={{ height: 40, backgroundColor: '#EEE', borderRadius: 4, marginBottom: 20, padding: 10 }}
+          placeholder="What are looking for?"
+        />
+      </View>
+      <FlatList<Result>
+        data={data?.results}
+        keyExtractor={({ name }, index) => name}
+        renderItem={({ item }) => (
+          <Text style={styles.listItemText}>
+            <MaterialCommunityIcons name="pokeball" size={24} color="red" style={{paddingRight: 10} } />
+            {item.name}
+          </Text>
+        )}
+      />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    padding: '20px',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
-  title: {
-    fontSize: 20,
+  listItemText: {
+    padding: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+    fontSize: 20,
+    lineHeight: 16,
+    alignContent: 'center',
+    justifyContent: 'center'
+  }
 });

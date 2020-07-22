@@ -54,7 +54,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ 
+        options={{
           headerTitle: 'Tab One Title 1',
           headerStyle: {
             backgroundColor: 'tomato',
@@ -62,8 +62,8 @@ function TabOneNavigator() {
               shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.8,
-              shadowRadius: 2, 
-            }, 
+              shadowRadius: 2,
+            },
             elevation: 5,
           },
           headerTintColor: '#fff',
@@ -81,11 +81,19 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ 
-          headerTitle: 'Tab Two Title',
+        options={{
+          headerTitle: 'Pokemon List',
           headerStyle: {
-            color: 'tomato'
-          } 
+            backgroundColor: 'tomato',
+            boxWithShadow: {
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 0.8,
+              shadowRadius: 2,
+            },
+            elevation: 5,
+          },
+          headerTintColor: '#fff',
         }}
       />
     </TabTwoStack.Navigator>
