@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, FlatList, TextInput } from 'react-native';
+import { StyleSheet, FlatList, TextInput, Button } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { useState, useEffect } from 'react';
@@ -16,6 +16,7 @@ export default function TabTwoScreen() {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
+
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -28,10 +29,12 @@ export default function TabTwoScreen() {
         data={data?.results}
         keyExtractor={({ name }, index) => name}
         renderItem={({ item }) => (
-          <Text style={styles.listItemText}>
-            <MaterialCommunityIcons name="pokeball" size={24} color="red" style={{paddingRight: 10} } />
-            {item.name}
-          </Text>
+          <View style={{flexDirection: "row", paddingVertical: 20}}>
+            <MaterialCommunityIcons name="pokeball" size={24} color="red" style={{ flex: 0.1 }} />
+            <Text style={styles.listItemText}>
+              {item.name}
+            </Text>
+          </View>
         )}
       />
     </ScrollView>
@@ -45,11 +48,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   listItemText: {
-    padding: 20,
     fontWeight: 'bold',
     fontSize: 20,
     lineHeight: 16,
     alignContent: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flex: 0.9
   }
 });

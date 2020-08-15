@@ -2,13 +2,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { FontAwesome } from '@expo/vector-icons';
+import { View } from '../components/Themed';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -55,7 +56,7 @@ function TabOneNavigator() {
         name="TabOneScreen"
         component={TabOneScreen}
         options={{
-          headerTitle: 'Tab One Title 1',
+          headerTitle: 'Home',
           headerStyle: {
             backgroundColor: 'tomato',
             boxWithShadow: {
@@ -67,6 +68,7 @@ function TabOneNavigator() {
             elevation: 5,
           },
           headerTintColor: '#fff',
+          headerLeft: () => <FontAwesome name="bars" size={24} color="white" style={{marginLeft: 20}}/>
         }}
       />
     </TabOneStack.Navigator>
@@ -82,7 +84,7 @@ function TabTwoNavigator() {
         name="TabTwoScreen"
         component={TabTwoScreen}
         options={{
-          headerTitle: 'Pokemon List',
+          headerTitle: 'Pokedex',
           headerStyle: {
             backgroundColor: 'tomato',
             boxWithShadow: {
@@ -94,21 +96,9 @@ function TabTwoNavigator() {
             elevation: 5,
           },
           headerTintColor: '#fff',
+          headerLeft: () => <FontAwesome name="bars" size={24} color="white" style={{marginLeft: 20}}/>
         }}
       />
     </TabTwoStack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'blue',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
